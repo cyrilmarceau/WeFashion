@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Tous les produits</h1>
+<h1>Produits soldé</h1>
 
     <div class="row g-5">
         <div class="col-12 mx-3">
@@ -29,5 +29,4 @@
         </div>
         @endforelse
     </div>
-
 @endsection

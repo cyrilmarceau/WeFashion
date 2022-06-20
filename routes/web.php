@@ -20,14 +20,13 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-// Auth::routes();
+Auth::routes();
+
 Route::resource('admin', ProductController::class)->middleware('auth');
 
 Route::controller(FrontController::class)->group(function() {
-    Route::get('/', 'index')->name('product.list')->where(['id' => '[0-9]+']);;
-    // Route::get('/create', 'BookController@create');
-    // Route::post('/store', 'BookController@store');
-    // Route::get('/{id}/edit', 'BookController@edit');
-    // Route::post('/{id}/update', 'BookController@update');
-    // Route::get('/{id}/delete', 'BookController@delete');
+    Route::get('/', 'index')->name('product.list')->where(['id' => '[0-9]+']);
+    Route::get('produits/{id}', 'getByID')->name('product.show')->where(['id' => '[0-9]+']);
+    Route::get('/produits/categorie/{id}', 'getByCategory')->name('product.category')->where(['id' => '[0-9]+']);;
+    Route::get('/produits/soldes', 'getBySales')->name('product.sales');
 });

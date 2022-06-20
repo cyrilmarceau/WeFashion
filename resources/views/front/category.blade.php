@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Tous les produits</h1>
+<h1>Produits de la catégorie {{ $category->people }} </h1>
 
     <div class="row g-5">
         <div class="col-12 mx-3">
@@ -30,4 +30,7 @@
         @endforelse
     </div>
 
+    <div class="col-12">
+        {{-- {{ $products->links() }} --}}
+    </div>
 @endsection

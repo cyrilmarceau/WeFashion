@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
         Storage::disk('local')->delete(Storage::allFiles('images'));
 
         // Create 30 product
-        Product::factory()->count(5)->create()->each(function($product) {
+        Product::factory()->count(15)->create()->each(function($product) {
 
             // Get id of random category
             $category = Category::find(rand(1, 2));

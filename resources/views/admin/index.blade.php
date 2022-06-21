@@ -8,7 +8,7 @@
 
                 {{-- <caption>Liste des produits</caption> --}}
                     
-                <caption class="text-end my-3"><a class="btn btn-primary" href="#" role="button">Nouveau</a></caption>
+                <caption class="text-end my-3"><a class="btn btn-primary" href="{{route('admin.product.create')}}" role="button">Nouveau</a></caption>
             
             <thead>
                 <tr>
@@ -30,7 +30,7 @@
                         <td scope="" style="width: 10%;">{{$product->price}} €</td>
                         <td scope="">{{$product->status}}</td>
                         <td scope="">
-                            <a class="edit" href=#><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a class="edit" href="{{route('admin.product.edit', $product->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>
                         <td scope="">
                             <a class="delete" href=#><i class="fa-solid fa-trash-can"></i></a>

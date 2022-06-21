@@ -15,11 +15,11 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $peoples = ['men', 'women', ];
+        $names = ['men', 'women', ];
 
-        foreach ($peoples as $value) {
+        foreach ($names as $value) {
             Category::create([
-                'people' => $value
+                'name' => $value
             ]);
         }
     }

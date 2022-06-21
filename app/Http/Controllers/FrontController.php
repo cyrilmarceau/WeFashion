@@ -11,7 +11,7 @@ class FrontController extends Controller
     public function __construct()
     {
         view()->composer('partials.front-menu', function($view){
-            $categories = Category::pluck('people', 'id')->all();
+            $categories = Category::pluck('name', 'id')->all();
             $view->with('categories', $categories);
         });
     }

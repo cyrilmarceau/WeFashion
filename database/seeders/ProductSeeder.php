@@ -20,7 +20,7 @@ class ProductSeeder extends Seeder
     public function run()
     {
         // Delete all images from storage in folder name 'images'
-        Storage::disk('local')->delete(Storage::allFiles('images'));
+        // Storage::disk('local')->delete(Storage::allFiles('images'));
 
         // Create 30 product
         Product::factory()->count(15)->create()->each(function($product) {
@@ -34,6 +34,12 @@ class ProductSeeder extends Seeder
   
             $size = Size::pluck('id')->shuffle()->slice(0, rand(1, 3))->all();
             $product->sizes()->attach($size);
+            
+            // $picturesList = Storage::allFiles('/images/' . $category->name . '/');
+
+            // $product->picture()->create([
+            //     'link' => $picturesList[rand(0, count($picturesList) - 1)]
+            // ]);
 
             $link = Str::random(12) . '.jpg';
             $file = file_get_contents('https://picsum.photos/200');

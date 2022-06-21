@@ -3,9 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Size;
+use App\Models\Category;
+
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+use App\Http\Requests\ProductRequest;
+
+class AdminProductController extends Controller
 {
     public function __construct()
     {
@@ -34,7 +39,14 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        $sizes = Size::all();
+        $categories = Category::all();
+        $status = Product::all(['status']);
+        
+        return view('admin.product.form', [
+            'sizes' => $sizes,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -43,9 +55,10 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $productRequest)
     {
-        //
+        dd($productRequest->all());
+        return redirect()->route('admin.product.index')->with('message', 'Livre ajouté !');
     }
 
     /**
@@ -66,8 +79,26 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
-    {
-        //
+    {   
+        $sizes = Size::all();
+        $status = Product::all(['status']);
+
+        $product = Product::find($product->id);
+        $categories = Category::all();
+        
+        $checkedSizes = [];
+
+        foreach ($product->sizes as $value) {
+            $checkedSizes[] = $value->id;
+        }
+
+        return view('admin.product.form', [
+            'product' => $product,
+            'status' => $status,
+            'sizes' => $sizes,
+            'categories' => $categories,
+            'checkedSizes' => $checkedSizes
+        ]);
     }
 
     /**
@@ -77,9 +108,9 @@ class AdminController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $productRequest, Product $product)
     {
-        //
+        dd($productRequest->all());
     }
 
     /**

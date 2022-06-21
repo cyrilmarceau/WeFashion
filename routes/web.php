@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\FrontController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminProductController;
+use App\Http\Controllers\AdminCategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::resource('admin', AdminController::class)->middleware('auth');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('product', AdminProductController::class)->middleware('auth');
+});
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('category', AdminCategoryController::class)->middleware('auth');
+});
+
 
 Route::controller(FrontController::class)->group(function() {
     Route::get('/', 'index')->name('product.list')->where(['id' => '[0-9]+']);

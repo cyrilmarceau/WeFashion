@@ -15,7 +15,7 @@
         <div class="col-5">
             <p>{{ $product->name }}</p>
             <p>Prix: {{ $product->price }}€</p>
-            <p>Status: {{ $product->status }}</p>
+            <p>Status: {{__('db.status.' . $product->status)}}</p>
             <p>Référence: {{ $product->reference }}</p>
             <p>Crée le: {{ $product->created_at }}</p>
 

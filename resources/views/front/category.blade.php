@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>Produits de la catégorie {{ $category->name == "men" ? "homme" : 'femme' }} </h1>
+<h1>Produits de la catégorie <span class="text-lowercase">{{__('db.categories.' . $category->name)}}</span></h1>
 
     <div class="row g-5">
         <div class="col-12 mx-3">

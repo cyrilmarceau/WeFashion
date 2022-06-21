@@ -34,7 +34,7 @@
                         <td scope="">{{$product->description}}</td>
                         <td scope="">CAT</td>
                         <td scope="" style="width: 10%;">{{$product->price}} €</td>
-                        <td scope="">{{$product->status}}</td>
+                        <td scope="">{{__('db.status.' . $product->status)}}</td>
                         <td scope="">
                             <a class="edit" href="{{route('admin.product.edit', $product->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
                         </td>

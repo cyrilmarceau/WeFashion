@@ -16,4 +16,15 @@ class Size extends Model
     public function products(){
         return $this->belongsToMany(Product::class);
     }
+    
+    /**
+     * getAll
+     * Get all sizes
+     * @return void
+     */
+    public static function getAll()
+    {
+        $sizes = Size::all();
+        return $sizes;
+    }
 }

@@ -24,23 +24,29 @@ class FrontController extends Controller
      */
     public function index()
     {
-
-        $products = Product::paginate(6);
+        // Get product published
+        $products = Product::getAllPublished();
+        
+        // get pagination associate to product
+        $productsPaginate = Product::getPagination($products, 6);
+        
+        // Get product count
         $productCount = $this->getAllCountProduct($products);
 
-        return view('front.index', ['products' => $products, 'count' => $productCount]);
+        return view('front.index', ['products' => $productsPaginate, 'count' => $productCount]);
     }
 
 
     public function getByCategory(int $id)
     {   
-        $products = Product::where('category_id', $id)->paginate(6);
+        $products = Product::getByCategoryId($id);
+        $productsPaginate = Product::getPagination($products, 6);
         $productCount = $this->getAllCountProduct($products);
 
-        $category = Category::find($id);
+        $category = Category::getByID($id);
         
         return view('front.category', [
-            'products' => $products,
+            'products' => $productsPaginate,
             'category' => $category,
             'count' => $productCount
         ]);
@@ -56,7 +62,7 @@ class FrontController extends Controller
     public function getByID(int $id)
     {
         
-        $product = Product::find($id);
+        $product = Product::getByID($id);
         
         return view(
             'front.product', 
@@ -71,13 +77,14 @@ class FrontController extends Controller
      */
     public function getBySales()
     {
-        $products = Product::where('status', 'on_sale')->get();
+        $products = Product::getByStatusOnSale();
+        $productsPaginate = Product::getPagination($products, 6);
         $productCount = $this->getAllCountProduct($products);
 
         return view(
             'front.sales', 
             [
-            'products' => $products,
+            'products' => $productsPaginate,
             'count' => $productCount]
         );
     }

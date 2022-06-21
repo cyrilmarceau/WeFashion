@@ -19,10 +19,7 @@ class AdminProductController extends Controller
 {
     public function __construct()
     {
-        view()->composer('partials.menu', function($view){
-            $categories = Category::pluck('people', 'id')->all();
-            $view->with('categories', $categories);
-        });
+        // 
     }
 
     /**
@@ -32,7 +29,8 @@ class AdminProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(15);
+        $products = Product::getPagination(null, 15);
+
 
         return view('admin.index', ['products' => $products]);
     }
@@ -44,9 +42,8 @@ class AdminProductController extends Controller
      */
     public function create()
     {
-        $sizes = Size::all();
-        $categories = Category::all();
-        $status = Product::all(['status']);
+        $sizes = Size::getAll();
+        $categories = Category::getAll();
         
         return view('admin.product.form', [
             'sizes' => $sizes,
@@ -102,10 +99,9 @@ class AdminProductController extends Controller
      */
     public function edit(Product $product)
     {   
-        $sizes = Size::all();
-        $status = Product::all(['status']);
-        $product = Product::find($product->id);
-        $categories = Category::all();
+        $sizes = Size::getAll();
+        $product = Product::getByID($product->id);
+        $categories = Category::getAll();
         
         $checkedSizes = [];
 
@@ -115,7 +111,6 @@ class AdminProductController extends Controller
 
         return view('admin.product.form', [
             'product' => $product,
-            'status' => $status,
             'sizes' => $sizes,
             'categories' => $categories,
             'checkedSizes' => $checkedSizes
@@ -131,7 +126,7 @@ class AdminProductController extends Controller
      */
     public function update(ProductRequest $productRequest, Product $product, ProductService $productService)
     {
-        $product = Product::find($product->id);
+        $product = Product::getByID($product->id);
 
         $product->update($productRequest->all());
 

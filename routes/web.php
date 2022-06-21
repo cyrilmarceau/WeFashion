@@ -30,3 +30,6 @@ Route::controller(FrontController::class)->group(function() {
     Route::get('/produits/categorie/{id}', 'getByCategory')->name('product.category')->where(['id' => '[0-9]+']);;
     Route::get('/produits/soldes', 'getBySales')->name('product.sales');
 });
+
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

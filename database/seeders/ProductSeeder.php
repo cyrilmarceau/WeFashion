@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
         // Storage::disk('local')->delete(Storage::allFiles('images'));
 
         // Create 30 product
-        Product::factory()->count(15)->create()->each(function($product) {
+        Product::factory()->count(80)->create()->each(function($product) {
 
             // Get id of random category
             $category = Category::find(rand(1, 2));
@@ -35,19 +35,21 @@ class ProductSeeder extends Seeder
             $size = Size::pluck('id')->shuffle()->slice(0, rand(1, 3))->all();
             $product->sizes()->attach($size);
             
-            // $picturesList = Storage::allFiles('/images/' . $category->name . '/');
-
-            // $product->picture()->create([
-            //     'link' => $picturesList[rand(0, count($picturesList) - 1)]
-            // ]);
-
-            $link = Str::random(12) . '.jpg';
-            $file = file_get_contents('https://picsum.photos/200');
-            Storage::disk('local')->put('images/'.$link, $file);
+            $picturesList = Storage::allFiles('/images/' . $category->name . '/');
+            
+            $linkFormatted = strrpos($picturesList[rand(0, count($picturesList) - 1)], 'images') +7;
 
             $product->picture()->create([
-                'link' => $link
+                'link' => substr($picturesList[rand(0, count($picturesList) - 1)], $linkFormatted)
             ]);
+
+            // $link = Str::random(12) . '.jpg';
+            // $file = file_get_contents('https://picsum.photos/200');
+            // Storage::disk('local')->put('images/'.$link, $file);
+
+            // $product->picture()->create([
+            //     'link' => $link
+            // ]);
         });
     }
 }

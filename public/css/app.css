@@ -10279,6 +10279,15 @@ textarea.form-control-lg {
 .card {
   height: 100%;
 }
+.card > img {
+  width: 100%;
+  vertical-align: middle;
+  height: 350px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: top;
+     object-position: top;
+}
 
 body .table-responsive {
   max-height: 85vh;

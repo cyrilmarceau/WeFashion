@@ -1,3 +1,11 @@
 .card {
     height: 100%;
+    
+    & > img {
+        width: 100%;
+        vertical-align: middle;
+        height: 350px;
+        object-fit: cover;
+        object-position: top;
+    }
 }

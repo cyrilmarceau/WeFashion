@@ -30,7 +30,11 @@
                 <label  class="form-label" for="description">Description</label>
                 <textarea
                     class="form-control" id="description" 
-                    name="description"> {{old('description')}}</textarea>
+                    name="description">
+                    {{ $isCreateRoute === true ?
+                        old('description') : old('description', $product->description)
+                    }}
+                    </textarea>
 
                 @error('description')
                     <div class="alert alert-danger" role="alert">

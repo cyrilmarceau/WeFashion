@@ -1,0 +1,7 @@
+.product {
+    & > img {
+        vertical-align: middle;
+        object-fit: cover;
+        object-position: top;
+    }
+}

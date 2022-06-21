@@ -4,7 +4,7 @@
 
 <h1>{{ $product->name }}</h1>
 
-    <div class="row">
+    <div class="row product">
         <div class="col-7">
             @if(isset($product->picture))
                 <img src="{{asset('/images/' . $product->picture->link)}}" alt="Produit {{ $product->name }}">

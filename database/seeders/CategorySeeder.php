@@ -15,7 +15,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $names = ['men', 'women', ];
+        $names = ['men', 'women'];
 
         foreach ($names as $value) {
             Category::create([

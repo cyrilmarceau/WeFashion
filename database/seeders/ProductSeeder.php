@@ -42,14 +42,6 @@ class ProductSeeder extends Seeder
             $product->picture()->create([
                 'link' => substr($picturesList[rand(0, count($picturesList) - 1)], $linkFormatted)
             ]);
-
-            // $link = Str::random(12) . '.jpg';
-            // $file = file_get_contents('https://picsum.photos/200');
-            // Storage::disk('local')->put('images/'.$link, $file);
-
-            // $product->picture()->create([
-            //     'link' => $link
-            // ]);
         });
     }
 }

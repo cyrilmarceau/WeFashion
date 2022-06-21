@@ -23,7 +23,7 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
             $table->enum('status', ['on_sale', 'standard']);
-            $table->enum('visibility', ['publish', 'unpublished']);
+            $table->enum('visibility', ['published', 'unpublished']);
             $table->string('reference', 16);
             
             $table->timestamps();

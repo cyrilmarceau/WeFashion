@@ -80,7 +80,7 @@ class ProductFactory extends Factory
             'category_id' => Category::find(rand(1, 2)),
             'price' => $this->faker->randomFloat(2, 1, 1500),
             'status' => $this->faker->randomElement(['on_sale', 'standard']),
-            'visibility' => $this->faker->randomElement(['publish', 'unpublished']),
+            'visibility' => $this->faker->randomElement(['published', 'unpublished']),
             'reference' => $this->faker->regexify('[a-zA-Z0-9]{16}')
         ];
     }

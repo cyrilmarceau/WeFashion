@@ -1,7 +1,13 @@
 @extends('layouts.admin')
 
 @section('content')
-   
+    
+    @if (session('message'))
+        <div class="alert alert-success mt-4">
+            {{ session('message') }}
+        </div>
+    @endif
+
     <div class="table-responsive">
         <table class="table table-striped caption-top align-middle">
             

@@ -27,6 +27,20 @@
         </div>
 
         <div class="mb-3">
+                <label  class="form-label" for="description">Description</label>
+                <textarea
+                    class="form-control" id="description" 
+                    name="description"> {{old('description')}}</textarea>
+
+                @error('description')
+                    <div class="alert alert-danger" role="alert">
+                        {{$message}}
+                    </div>
+                @enderror
+
+            </div>
+
+        <div class="mb-3">
             <label for="price" class="form-label">Prix</label>
             <input type="number"
                 step="any"

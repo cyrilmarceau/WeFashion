@@ -27,14 +27,8 @@ class ProductRequest extends FormRequest
             'name' => 'required|min:5',
             'price' => 'required',
             'reference' => 'required|min:16',
-            'sizes' => 'required',
-            'picture' => 'image|max:1000|required'
-//             'description' => 'required|string',
-//            'genre_id' => 'integer'
-
-//             'authors.*' => 'integer', // .* correspond au faite que c'est un tableau
-            
-//             'picture' => 'image|max:1000'
+            'sizes.*' => 'required',
+            'picture' => 'image|max:1000'
         ];
     }
 
@@ -47,9 +41,7 @@ class ProductRequest extends FormRequest
             'reference.min' => 'La référence du produit doit faire 16 caractères minimum',
             'reference.required' => 'La référence du produit est obligatoire',
             'sizes.required' => "Au moins une taille est obligatoire",
-            "picture.required" => "Une photo du produit est obligatoire"
-            // 'description.required' => 'La description du livre est obligatoire !',
-            // 'description.string' => 'La description doit être un texte.',
+            "picture.required" => "La photo ne doit pas dépasser 1 mega"
         ];
     }
 }

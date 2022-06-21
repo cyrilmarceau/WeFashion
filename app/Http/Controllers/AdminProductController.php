@@ -7,6 +7,7 @@ use App\Models\Size;
 use App\Models\Category;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 use App\Http\Requests\ProductRequest;
 
@@ -56,8 +57,24 @@ class AdminProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ProductRequest $productRequest)
-    {
-        dd($productRequest->all());
+    {   
+        // Create product
+        $product = Product::create($productRequest->all());
+
+        // Synchronize sizes
+        $product->sizes()->attach($productRequest->sizes);
+
+        // Save picture and set it in local
+        if(!empty($bookRequest->picture)){
+            $link = $productRequest->picture->store('images');
+            $imgName = substr($link, strrpos($link, '/') + 1);
+
+            $product->picture()->create([
+                'link' => $imgName . Str::random(5),
+            ]);
+        }
+        
+        // Redirect to admin home page 
         return redirect()->route('admin.product.index')->with('message', 'Livre ajouté !');
     }
 

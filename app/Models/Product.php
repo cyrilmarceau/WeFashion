@@ -9,6 +9,17 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'price',
+        'category_id',
+        'status',
+        'visibility',
+        'reference',
+        'updated_at'
+    ];
+
     // Reverse relation between category and product
     public function category(){
         return $this->belongsTo(Category::class);

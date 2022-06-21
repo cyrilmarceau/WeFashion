@@ -6,10 +6,14 @@ use App\Models\Product;
 use App\Models\Size;
 use App\Models\Category;
 
+use App\Services\ProductService;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 use App\Http\Requests\ProductRequest;
+
+use Illuminate\Support\Facades\Storage;
 
 class AdminProductController extends Controller
 {
@@ -56,7 +60,7 @@ class AdminProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $productRequest)
+    public function store(ProductRequest $productRequest, ProductService $productService)
     {   
         // Create product
         $product = Product::create($productRequest->all());
@@ -65,17 +69,18 @@ class AdminProductController extends Controller
         $product->sizes()->attach($productRequest->sizes);
 
         // Save picture and set it in local
-        if(!empty($bookRequest->picture)){
-            $link = $productRequest->picture->store('images');
-            $imgName = substr($link, strrpos($link, '/') + 1);
+        if(!empty($productRequest->picture)){
+            $link = $productService->setPictureToStore($productRequest->picture);
+
+            $imageName = $productService->getImageName($link);
 
             $product->picture()->create([
-                'link' => $imgName . Str::random(5),
+                'link' => $imageName . Str::random(5),
             ]);
         }
         
         // Redirect to admin home page 
-        return redirect()->route('admin.product.index')->with('message', 'Livre ajouté !');
+        return $productService->redirectToAdminHomePageWithMessage('Le produit a bien été ajouté !');
     }
 
     /**
@@ -99,7 +104,6 @@ class AdminProductController extends Controller
     {   
         $sizes = Size::all();
         $status = Product::all(['status']);
-
         $product = Product::find($product->id);
         $categories = Category::all();
         
@@ -125,9 +129,29 @@ class AdminProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $productRequest, Product $product)
+    public function update(ProductRequest $productRequest, Product $product, ProductService $productService)
     {
-        dd($productRequest->all());
+        $product = Product::find($product->id);
+
+        $product->update($productRequest->all());
+
+        $product->sizes()->sync($productRequest->sizes);
+
+        if(!empty($productRequest->picture)){
+
+            Storage::delete($product->picture->link);
+            
+            $link = $productService->setPictureToStore($productRequest->picture);
+
+            $imageName = $productService->getImageName($link);
+
+            $product->picture()->update([
+                'link' => $imageName,
+            ]);
+        }
+        
+        return $productService->redirectToAdminHomePageWithMessage('Le produit a bien été modifié !');
+
     }
 
     /**
@@ -136,6 +160,7 @@ class AdminProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
+
     public function destroy(Product $product)
     {
         //

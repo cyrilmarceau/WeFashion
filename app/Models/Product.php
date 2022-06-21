@@ -63,7 +63,7 @@ class Product extends Model
     {
         $products = Product::where('category_id', $id)
         ->where('visibility', 'published');
-
+        
         return $products;
     }
 

@@ -1,5 +1,6 @@
 body {
     .table-responsive {
+        max-height: 85vh;
         & > .table {
             & > a {
                 color: orange !important;

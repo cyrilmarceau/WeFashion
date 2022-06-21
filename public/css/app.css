@@ -10273,12 +10273,16 @@ textarea.form-control-lg {
 }
 .logo {
   color: #66EB9A !important;
+  text-transform: uppercase;
 }
 
 .card {
   height: 100%;
 }
 
+body .table-responsive {
+  max-height: 85vh;
+}
 body .table-responsive > .table > a {
   color: orange !important;
 }

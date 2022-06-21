@@ -14,7 +14,7 @@
 
                 {{-- <caption>Liste des produits</caption> --}}
                     
-                <caption class="text-end my-3"><a class="btn btn-primary" href="{{route('admin.product.create')}}" role="button">Nouveau</a></caption>
+                <caption class="text-end my-3 me-4"><a class="btn btn-primary" href="{{route('admin.product.create')}}" role="button">Nouveau</a></caption>
             
             <thead>
                 <tr>
@@ -45,6 +45,10 @@
                 @endforeach($products as $product)
             </tbody>
         </table>
+    </div>
+
+    <div class="col-12 mt-4 me-4">
+        {{ $products->links() }}
     </div>
 
 @endsection

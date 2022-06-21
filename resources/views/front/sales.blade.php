@@ -28,5 +28,9 @@
             <p>Aucun produit</p>
         </div>
         @endforelse
+
+        <div class="col-12">
+            {{ $products->links() }}
+        </div>
     </div>
 @endsection

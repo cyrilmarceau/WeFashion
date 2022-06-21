@@ -5,8 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class AdminController extends Controller
 {
+    public function __construct()
+    {
+        view()->composer('partials.menu', function($view){
+            $categories = Category::pluck('people', 'id')->all();
+            $view->with('categories', $categories);
+        });
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +22,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::paginate(15);
+
+        return view('admin.index', ['products' => $products]);
     }
 
     /**

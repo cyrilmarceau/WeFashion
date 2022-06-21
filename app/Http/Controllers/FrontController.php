@@ -10,7 +10,7 @@ class FrontController extends Controller
 {
     public function __construct()
     {
-        view()->composer('partials.menu', function($view){
+        view()->composer('partials.front-menu', function($view){
             $categories = Category::pluck('people', 'id')->all();
             $view->with('categories', $categories);
         });
@@ -34,7 +34,7 @@ class FrontController extends Controller
 
     public function getByCategory(int $id)
     {   
-        $products = Product::where('category_id', $id)->get();
+        $products = Product::where('category_id', $id)->paginate(6);
         $productCount = $this->getAllCountProduct($products);
 
         $category = Category::find($id);

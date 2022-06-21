@@ -1,0 +1,10 @@
+body {
+    .table-responsive {
+        & > .table {
+            & > a {
+                color: orange !important;
+               
+            }
+        }
+    } 
+}

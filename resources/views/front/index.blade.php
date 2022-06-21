@@ -4,6 +4,8 @@
 
 <h1>Tous les produits</h1>
 
+
+
     <div class="row g-5">
         <div class="col-12 mx-3">
             <p class="text-end">Résultat{{ $count > 1 ? "s" : "" }}: {{ $count }}</p>
@@ -28,6 +30,10 @@
             <p>Aucun produit</p>
         </div>
         @endforelse
+
+        <div class="col-12">
+            {{ $products->links() }}
+        </div>
     </div>
 
 @endsection

@@ -31,8 +31,7 @@ class AdminProductController extends Controller
     {
         $products = Product::getPagination(null, 15);
 
-
-        return view('admin.index', ['products' => $products]);
+        return view('admin.product.index', ['products' => $products]);
     }
 
     /**
@@ -78,6 +77,22 @@ class AdminProductController extends Controller
         
         // Redirect to admin home page 
         return $productService->redirectToAdminHomePageWithMessage('Le produit a bien été ajouté !');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Product $product)
+    {
+        $product = Product::getByID($product->id);
+        
+        return view(
+            'admin.product.single', 
+            ['product' => $product]
+        );
     }
 
     /**
@@ -145,8 +160,11 @@ class AdminProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(Product $product)
+    public function destroy(Product $product, ProductService $productService)
     {
-        //
+        dd('yop');
+        $product->delete();
+
+        return $productService->redirectToAdminHomePageWithMessage('Le produit a bien été supprimé !');
     }
 }

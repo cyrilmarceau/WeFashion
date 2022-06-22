@@ -24,7 +24,11 @@ class AdminCategoryController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::getAll();
+        
+        return view('admin.category.form', [
+            'categories' => $categories
+        ]);
     }
 
     /**

@@ -25,7 +25,7 @@ class FrontController extends Controller
     public function index()
     {
         // Get product published
-        $products = Product::getAllPublished();
+        $products = Product::getByVisibilityPublished();
         
         // get pagination associate to product
         $productsPaginate = Product::getPagination($products, 6);

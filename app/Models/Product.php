@@ -47,30 +47,50 @@ class Product extends Model
         $products = Product::all();
         return $products;
     }
-    
+
     /**
-     * getAllPublished
+     * getByID
+     * Get product by his ID
+     * @param  mixed $id
+     * @return object
+     */
+    public static function getByID(int $id): object
+    {
+        $product = Product::find($id);
+        return $product;
+    }
+
+
+    public static function getByCategoryId($id)
+    {
+        $productsPublished = self::getByVisibilityPublished();
+
+        $products = $productsPublished->where('category_id', $id);
+
+        return $products;
+    }
+
+    /**
+     * getByVisibilityPublished
      * Get product published
      * @return void
      */
-    public static function getAllPublished()
+    public static function getByVisibilityPublished()
     {
         $products = Product::where('visibility', 'published');
         return $products;
     }
 
-    public static function getByCategoryId($id)
-    {
-        $products = Product::where('category_id', $id)
-        ->where('visibility', 'published');
-        
-        return $products;
-    }
-
+    /**
+     * getByStatusOnSale
+     * Get product published
+     * @return void
+     */
     public static function getByStatusOnSale()
     {
-        $products = Product::where('status', 'on_sale')
-        ->where('visibility', 'published');
+        $productsPublished = self::getByVisibilityPublished();
+
+        $products = $productsPublished->where('status', 'on_sale');
 
         return $products;
     }
@@ -95,16 +115,6 @@ class Product extends Model
 
         return $productsPaginate;
     }
-    /**
-     * getByID
-     * Get product by his ID
-     * @param  mixed $id
-     * @return object
-     */
-    public static function getByID(int $id): object
-    {
-        $product = Product::find($id);
-        return $product;
-    }
+
 
 }

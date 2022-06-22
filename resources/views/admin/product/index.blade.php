@@ -25,21 +25,34 @@
                     <th scope="col">Etat</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($products as $product )
                     <tr>
-                        <th scope="">{{$product->name}}</th>
-                        <td scope="">{{$product->description}}</td>
-                        <td scope="">CAT</td>
-                        <td scope="" style="width: 10%;">{{$product->price}} €</td>
-                        <td scope="">{{__('db.status.' . $product->status)}}</td>
-                        <td scope="">
-                            <a class="edit" href="{{route('admin.product.edit', $product->id)}}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <th>{{$product->name}}</th>
+                        <td>{{$product->description}}</td>
+                        <td>{{__('db.categories.' .$product->category->name)}}</td>
+                        <td style="width: 10%;">{{$product->price}} €</td>
+                        <td>{{__('db.status.' . $product->status)}}</td>
+                        <td>
+                            <a lass="edit btn btn-primary" href="{{route('admin.product.show', $product->id)}}">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
                         </td>
-                        <td scope="">
-                            <a class="delete" href=#><i class="fa-solid fa-trash-can"></i></a>
+                        <td>
+                            <a class="edit btn btn-light" href="{{route('admin.product.edit', $product->id)}}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a class="delete btn btn-danger"
+                                onclick="return confirm('Are you sure?')"
+                                href="{{route('admin.product.destroy', $product->id)}}"
+                            >
+                                <i class="fa-solid fa-trash-can"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach($products as $product)

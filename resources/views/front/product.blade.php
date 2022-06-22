@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h1>{{ $product->name }}</h1>
+    <h1>{{ $product->name }}</h1>
 
     <div class="row product">
         <div class="col-7">

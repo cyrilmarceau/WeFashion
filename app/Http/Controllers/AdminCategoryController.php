@@ -61,7 +61,12 @@ class AdminCategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $categories = Category::getAll();
+
+        return view('admin.category.form', [
+            'categories' => $categories,
+            'category' => $category
+        ]);
     }
 
     /**
@@ -71,9 +76,12 @@ class AdminCategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $categoryRequest, Category $category, CommonService $commonService)
     {
-        //
+
+        $category->update($categoryRequest->all());
+
+        return $commonService->redirectToAdminCategoriesWithMessage('La catégorie a bien été modifié !');
     }
 
     /**
@@ -82,8 +90,10 @@ class AdminCategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, CommonService $commonService)
     {
-        //
+        $category->delete();
+        
+        return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été supprimé !');
     }
 }

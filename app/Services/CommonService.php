@@ -28,7 +28,7 @@ class CommonService
      */
     public function redirectToAdminCategoriesWithMessage($message)
     {
-        return redirect()->route('admin.product.index')->with('message', $message);
+        return redirect()->route('admin.category.index')->with('message', $message);
     }
 }
 

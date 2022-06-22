@@ -131,8 +131,6 @@ class AdminProductController extends Controller
      */
     public function update(ProductRequest $productRequest, Product $product, ProductService $productService, CommonService $commonService)
     {
-        $product = Product::getByID($product->id);
-
         $product->update($productRequest->all());
 
         $product->sizes()->sync($productRequest->sizes);
@@ -160,7 +158,14 @@ class AdminProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-
+    
+    /**
+     * destroy
+     * Remove product
+     * @param  mixed $product
+     * @param  mixed $commonService
+     * @return void
+     */
     public function destroy(Product $product, CommonService $commonService)
     {
         $product->delete();

@@ -47,36 +47,35 @@
                             </a>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#productModal">
+                            {{-- <a href="{{route('admin.product.confirm', $product->id)}}">DELETE</a> --}}
+                            <button type="button" class="btn btn-danger" id="modal-btn" data-id={{ $product->id }} data-bs-toggle="modal" data-bs-target="#productModal">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
-  
                         </td>
                     </tr>
-
-                    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalExample" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="productModalExample">Voulez-vous supprimer le produit {{ $product->name }}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Non</button>
-
-                                <form action="{{route('admin.product.destroy', $product->id)}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn btn-danger" type="submit"> Supprimer</button>
-                                </form>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-
                 @endforeach($products as $product)
             </tbody>
         </table>
+    </div>
+
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalExample" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="productModalExample">Voulez-vous supprimer le produit {{ $product->name }} </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Non</button>
+                <span>{{ $product->id }}</span>
+                <form action="{{route('admin.product.destroy', $product->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit"> Supprimer</button>
+                </form>
+            </div>
+            </div>
+        </div>
     </div>
 
     <div class="col-12 mt-4 me-4">

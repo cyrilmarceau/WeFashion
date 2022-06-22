@@ -25,9 +25,11 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5',
+            'description' => 'required',
             'price' => 'required',
             'reference' => 'required|min:16',
-            'sizes.*' => 'required',
+            'sizes' => 'required',
+            'sizes.*' => 'integer',
             'picture' => 'image|max:1000'
         ];
     }
@@ -37,6 +39,7 @@ class ProductRequest extends FormRequest
         return [
             'name.required' => 'Le nom du produit est obligatoire',
             'name.min' => 'Le nom du produit doit faire 5 caractères minimum',
+            'description.required' => 'Une description du produit est obligatoire',
             'price.required' => 'Le prix du produit est obligatoire',
             'reference.min' => 'La référence du produit doit faire 16 caractères minimum',
             'reference.required' => 'La référence du produit est obligatoire',

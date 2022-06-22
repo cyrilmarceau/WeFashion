@@ -27,7 +27,7 @@
             <tbody>
                 @foreach ($categories as $category)
 
-                <?=  $category->id ?>
+
                     <tr>
                         <th style="width: 90%">{{$category->name}}</th>
                         <td>

@@ -168,7 +168,12 @@ class AdminProductController extends Controller
      */
     public function destroy(Product $product, CommonService $commonService)
     {
-        $product->delete();
-        return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été supprimé !');
+        // $product->delete();
+        // return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été supprimé !');
+    }
+
+    public function modalConfirm()
+    {
+        die('yop');
     }
 }

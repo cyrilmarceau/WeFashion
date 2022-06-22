@@ -73,7 +73,7 @@ class Product extends Model
     /**
      * getByVisibilityPublished
      * Get product published
-     * @return void
+     * @return object
      */
     public static function getByVisibilityPublished()
     {
@@ -91,7 +91,7 @@ class Product extends Model
         $productsPublished = self::getByVisibilityPublished();
 
         $products = $productsPublished->where('status', 'on_sale');
-
+        
         return $products;
     }
 

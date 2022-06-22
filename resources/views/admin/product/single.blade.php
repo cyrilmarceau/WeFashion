@@ -32,6 +32,12 @@
                     @endforelse
                 </select>
             </div>
+
+            <a class="btn btn-primary"
+                href="{{route('admin.product.edit', $product->id)}}">
+
+                Modifier ce produit
+            </a>
         </div>
     </div>
 @endsection

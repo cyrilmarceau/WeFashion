@@ -35,7 +35,9 @@ class ProductSeeder extends Seeder
             $size = Size::pluck('id')->shuffle()->slice(0, rand(1, 3))->all();
             $product->sizes()->attach($size);
             
-            $picturesList = Storage::allFiles('/images/' . $category->name . '/');
+            $categoryName = $category->name === 'Homme' ? 'men' : 'women';
+            
+            $picturesList = Storage::allFiles('/images/' . $categoryName . '/');
             
             $linkFormatted = strrpos($picturesList[rand(0, count($picturesList) - 1)], 'images') +7;
 

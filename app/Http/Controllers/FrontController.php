@@ -40,7 +40,9 @@ class FrontController extends Controller
     public function getByCategory(int $id)
     {   
         $products = Product::getByCategoryId($id);
+        
         $productsPaginate = Product::getPagination($products, 6);
+
         $productCount = $this->getAllCountProduct($products);
 
         $category = Category::getByID($id);

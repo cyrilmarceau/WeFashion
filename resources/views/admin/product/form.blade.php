@@ -155,7 +155,7 @@
                                 {{(old('category_id') == $categorie->id) || $product->category_id == $categorie->id ? 'selected' : ''}}
                         @endif
                     >
-                        {{$categorie->name === 'men' ? 'Homme' : 'Femme'}}
+                        {{$categorie->name}}
                     </option>
                 @endforeach
 

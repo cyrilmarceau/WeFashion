@@ -7,6 +7,7 @@ use App\Models\Size;
 use App\Models\Category;
 
 use App\Services\ProductService;
+use App\Services\CommonService;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -56,7 +57,7 @@ class AdminProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductRequest $productRequest, ProductService $productService)
+    public function store(ProductRequest $productRequest, ProductService $productService, CommonService $commonService)
     {   
         // Create product
         $product = Product::create($productRequest->all());
@@ -76,7 +77,7 @@ class AdminProductController extends Controller
         }
         
         // Redirect to admin home page 
-        return $productService->redirectToAdminHomePageWithMessage('Le produit a bien été ajouté !');
+        return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été ajouté !');
     }
 
     /**
@@ -128,7 +129,7 @@ class AdminProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $productRequest, Product $product, ProductService $productService)
+    public function update(ProductRequest $productRequest, Product $product, ProductService $productService, CommonService $commonService)
     {
         $product = Product::getByID($product->id);
 
@@ -149,7 +150,7 @@ class AdminProductController extends Controller
             ]);
         }
         
-        return $productService->redirectToAdminHomePageWithMessage('Le produit a bien été modifié !');
+        return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été modifié !');
 
     }
 
@@ -160,11 +161,9 @@ class AdminProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function destroy(Product $product, ProductService $productService)
+    public function destroy(Product $product, CommonService $commonService)
     {
-        dd('yop');
         $product->delete();
-
-        return $productService->redirectToAdminHomePageWithMessage('Le produit a bien été supprimé !');
+        return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été supprimé !');
     }
 }

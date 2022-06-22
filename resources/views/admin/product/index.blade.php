@@ -31,11 +31,11 @@
             <tbody>
                 @foreach ($products as $product )
                     <tr>
-                        <th>{{$product->name}}</th>
-                        <td>{{$product->description}}</td>
-                        <td>{{__('db.categories.' .$product->category->name)}}</td>
-                        <td style="width: 10%;">{{$product->price}} €</td>
-                        <td>{{__('db.status.' . $product->status)}}</td>
+                        <th style="width: 13%">{{$product->name}}</th>
+                        <td style="width: 38%">{{$product->description}}</td>
+                        <td style="width: 13%">{{$product->category->name}}</td>
+                        <td style="width: 13%">{{$product->price}} €</td>
+                        <td style="width: 13%">{{__('db.status.' . $product->status)}}</td>
                         <td>
                             <a lass="edit btn btn-primary" href="{{route('admin.product.show', $product->id)}}">
                                 <i class="fa-solid fa-eye"></i>
@@ -47,12 +47,15 @@
                             </a>
                         </td>
                         <td>
-                            <a class="delete btn btn-danger"
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                            {{-- <a class="delete btn btn-danger"
                                 onclick="return confirm('Are you sure?')"
                                 href="{{route('admin.product.destroy', $product->id)}}"
                             >
                                 <i class="fa-solid fa-trash-can"></i>
-                            </a>
+                            </a> --}}
                         </td>
                     </tr>
                 @endforeach($products as $product)
@@ -62,6 +65,26 @@
 
     <div class="col-12 mt-4 me-4">
         {{ $products->links() }}
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Voulez-vous supprimer le produit {{ $product->name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Non</button>
+
+                <form action="{{route('admin.product.destroy', $product->id)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger" type="submit"> Supprimer</button>
+                </form>
+            </div>
+            </div>
+        </div>
     </div>
 
 @endsection

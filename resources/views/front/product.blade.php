@@ -7,7 +7,7 @@
     <div class="row product">
         <div class="col-7">
             @if(isset($product->picture))
-                <img src="{{asset('/images/' . $product->picture->link)}}" alt="Produit {{ $product->name }}">
+                <img class="w-100" src="{{asset('/images/' . $product->picture->link)}}" alt="Produit {{ $product->name }}">
             @endif
 
             <p class="mt-2">{{ $product->description }}</p>

@@ -91,7 +91,7 @@ class AdminCategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category $category, CommonService $commonService)
-    {
+    {   
         $category->product()->update(['category_id' => null]);
         $category->delete();
 

@@ -2,10 +2,11 @@ window.addEventListener("load", function(event) {
 
     // Product modal
     const form = document.getElementById("formDelete");
-    const validateDelete = document.querySelector('.validateDelete')
+    const validateDelete = document.querySelector('.validateDelete');
 
-    validateDelete.addEventListener('click', () => {
-        form.submit()
-    })
-
+    if (validateDelete !== null) {
+        validateDelete.addEventListener('click', (e) => {
+            form.submit();
+        })
+    }
 });

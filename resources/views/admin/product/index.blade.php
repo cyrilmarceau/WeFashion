@@ -50,8 +50,9 @@
                             <form id="formDelete" action="{{route('admin.product.destroy', $product->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="button" class="btn btn-danger" id="triggerModalBtn" data-bs-toggle="modal" data-bs-target="#productModal">
-                                    <i class="fa-solid fa-trash-can"></i>
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Confirmer la suppression de ce produit ?')">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </button>
                                 </button>
                             </form>
                         </td>

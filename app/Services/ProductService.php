@@ -17,7 +17,7 @@ class ProductService
      */
     public function setPictureToStore($picture): string
     {
-        $link = $picture->store('image');
+        $link = $picture->store('images');
         return $link;
     }
     

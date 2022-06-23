@@ -72,7 +72,7 @@ class AdminProductController extends Controller
             $imageName = $productService->getImageName($link);
 
             $product->picture()->create([
-                'link' => $imageName . Str::random(5),
+                'link' => $imageName,
             ]);
         }
 
@@ -168,7 +168,7 @@ class AdminProductController extends Controller
      */
     public function destroy(Product $product, CommonService $commonService)
     {
-         $product->delete();
-         return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été supprimé !');
+        $product->delete();
+        return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été supprimé !');
     }
 }

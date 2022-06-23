@@ -3,6 +3,7 @@
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\AdminProductController;
 use App\Http\Controllers\AdminCategoryController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,5 +34,3 @@ Route::controller(FrontController::class)->group(function() {
     Route::get('/produits/categorie/{id}', 'getByCategory')->name('product.category')->where(['id' => '[0-9]+']);;
     Route::get('/produits/soldes', 'getBySales')->name('product.sales');
 });
-
-Route::post('admin/product/confirm', [ AdminProductController::class, 'modalConfirm' ])->name('admin.product.confirm');

@@ -3,6 +3,7 @@
 ## Install dependencies
 
 $ composer install
+$ npm install
 
 ## Run migration with seeder
 
@@ -11,6 +12,7 @@ $ php artisan migrate:fresh --seed
 ## Start server
 
 $ php artisan serve
+$ npm run watch
 
 ### Route
 

@@ -19,7 +19,7 @@ class AdminCategoryController extends Controller
     public function index()
     {
        $categories = Category::getAll();
-        
+
         return view('admin.category.index', [
             'categories' => $categories
         ]);
@@ -33,7 +33,7 @@ class AdminCategoryController extends Controller
     public function create()
     {
         $categories = Category::getAll();
-        
+
         return view('admin.category.form', [
             'categories' => $categories
         ]);
@@ -92,8 +92,9 @@ class AdminCategoryController extends Controller
      */
     public function destroy(Category $category, CommonService $commonService)
     {
+        $category->product()->update(['category_id' => null]);
         $category->delete();
-        
-        return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été supprimé !');
+
+       return $commonService->redirectToAdminCategoriesWithMessage('La catégorie a bien été supprimé !');
     }
 }

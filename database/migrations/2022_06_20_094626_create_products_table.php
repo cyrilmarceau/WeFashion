@@ -19,8 +19,8 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('price',8,2);
 
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->nullable()->references('id')->on('categories')->onDelete('set null');
 
             $table->enum('status', ['on_sale', 'standard']);
             $table->enum('visibility', ['published', 'unpublished']);

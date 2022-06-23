@@ -20,7 +20,7 @@ class AdminProductController extends Controller
 {
     public function __construct()
     {
-        // 
+        //
     }
 
     /**
@@ -44,7 +44,7 @@ class AdminProductController extends Controller
     {
         $sizes = Size::getAll();
         $categories = Category::getAll();
-        
+
         return view('admin.product.form', [
             'sizes' => $sizes,
             'categories' => $categories
@@ -58,7 +58,7 @@ class AdminProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ProductRequest $productRequest, ProductService $productService, CommonService $commonService)
-    {   
+    {
         // Create product
         $product = Product::create($productRequest->all());
 
@@ -75,8 +75,8 @@ class AdminProductController extends Controller
                 'link' => $imageName . Str::random(5),
             ]);
         }
-        
-        // Redirect to admin home page 
+
+        // Redirect to admin home page
         return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été ajouté !');
     }
 
@@ -89,9 +89,9 @@ class AdminProductController extends Controller
     public function show(Product $product)
     {
         $product = Product::getByID($product->id);
-        
+
         return view(
-            'admin.product.single', 
+            'admin.product.single',
             ['product' => $product]
         );
     }
@@ -103,11 +103,11 @@ class AdminProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
-    {   
+    {
         $sizes = Size::getAll();
         $product = Product::getByID($product->id);
         $categories = Category::getAll();
-        
+
         $checkedSizes = [];
 
         foreach ($product->sizes as $value) {
@@ -138,7 +138,7 @@ class AdminProductController extends Controller
         if(!empty($productRequest->picture)){
 
             Storage::delete($product->picture->link);
-            
+
             $link = $productService->setPictureToStore($productRequest->picture);
 
             $imageName = $productService->getImageName($link);
@@ -147,7 +147,7 @@ class AdminProductController extends Controller
                 'link' => $imageName,
             ]);
         }
-        
+
         return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été modifié !');
 
     }
@@ -158,7 +158,7 @@ class AdminProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    
+
     /**
      * destroy
      * Remove product
@@ -168,12 +168,7 @@ class AdminProductController extends Controller
      */
     public function destroy(Product $product, CommonService $commonService)
     {
-        // $product->delete();
-        // return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été supprimé !');
-    }
-
-    public function modalConfirm()
-    {
-        die('yop');
+         $product->delete();
+         return $commonService->redirectToAdminProductPageWithMessage('Le produit a bien été supprimé !');
     }
 }

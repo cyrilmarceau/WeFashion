@@ -31,14 +31,14 @@ class ProductSeeder extends Seeder
             // Associate category to product
             $product->category()->associate($category);
             $product->save();
-  
+
             $size = Size::pluck('id')->shuffle()->slice(0, rand(1, 3))->all();
             $product->sizes()->attach($size);
-            
+
             $categoryName = $category->name === 'Homme' ? 'men' : 'women';
-            
+
             $picturesList = Storage::allFiles('/images/' . $categoryName . '/');
-            
+
             $linkFormatted = strrpos($picturesList[rand(0, count($picturesList) - 1)], 'images') +7;
 
             $product->picture()->create([

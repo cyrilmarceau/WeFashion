@@ -77,7 +77,7 @@ class Product extends Model
      */
     public static function getByVisibilityPublished()
     {
-        $products = Product::where('visibility', 'published');
+        $products = Product::orderBy('created_at', 'desc')->where('visibility', 'published');
         return $products;
     }
 
@@ -107,10 +107,11 @@ class Product extends Model
     {
        
         if($products === null) {
-            return Product::paginate($pagination);
+            // return Product::paginate($pagination);
+            return Product::orderBy('created_at', 'desc')->paginate($pagination);
         }
 
-        $productsPaginate = $products->paginate($pagination);
+        $productsPaginate = $products->orderBy('created_at', 'desc')->paginate($pagination);
 
 
         return $productsPaginate;

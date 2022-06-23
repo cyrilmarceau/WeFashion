@@ -11,7 +11,9 @@
         <p>Prix: {{ $product->price }}€</p>
         <p>Status: {{__('db.status.' . $product->status)}}</p>
         <p>Référence: {{ $product->reference }}</p>
-        <p>Crée le: {{ $product->created_at }}</p>
+        <p>Status: {{__('db.status.' . $product->status)}}</p>
+        <p>Crée le: {{ date('d-m-Y h:i:s', strtotime($product->created_at)) }}</p>
+        <p>Modifié le: {{ date('d-m-Y h:i:s', strtotime($product->updated_at)) }}</p>
 
         <form>
             <div class="mb-3 form-check ps-0">

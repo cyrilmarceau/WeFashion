@@ -11,10 +11,10 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.product.index') }}">Produits</a>
+                    <a class="nav-link text-uppercase" href="{{ route('admin.product.index') }}">Produits</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.category.index') }}">Catégories</a>
+                    <a class="nav-link text-uppercase" href="{{ route('admin.category.index') }}">Catégories</a>
                 </li>
                 
             </ul>

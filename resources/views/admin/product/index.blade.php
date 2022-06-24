@@ -10,12 +10,9 @@
 
     <div class="table-responsive">
         <table class="table table-striped caption-top align-middle">
-
-
-                {{-- <caption>Liste des produits</caption> --}}
-
-                <caption class="text-end my-3 me-4"><a class="btn btn-primary" href="{{route('admin.product.create')}}" role="button">Nouveau</a></caption>
-
+                <caption class="text-end my-3 me-4">
+                    <a class="btn btn-primary" href="{{route('admin.product.create')}}" role="button">Nouveau</a>
+                </caption>
             <thead>
                 <tr>
                     <th scope="col">Nom</th>
@@ -47,7 +44,7 @@
                             </a>
                         </td>
                         <td>
-                            <form id="formDelete" action="{{route('admin.product.destroy', $product->id)}}" method="POST">
+                            <form id="formDelete-{{ $product->id }}" action="{{route('admin.product.destroy', $product->id)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                     <button type="submit" class="btn btn-danger" onclick="return confirm('Confirmer la suppression de ce produit ?')">

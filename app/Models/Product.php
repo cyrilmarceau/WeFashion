@@ -95,7 +95,7 @@ class Product extends Model
         return $products;
     }
 
-        
+
     /**
      * getPagination
      * Get pagination associate to products list
@@ -105,7 +105,7 @@ class Product extends Model
      */
     protected static function getPagination($products = null, int $pagination = 6)
     {
-       
+
         if($products === null) {
             // return Product::paginate($pagination);
             return Product::orderBy('created_at', 'desc')->paginate($pagination);
@@ -115,6 +115,5 @@ class Product extends Model
 
         return $productsPaginate;
     }
-
 
 }

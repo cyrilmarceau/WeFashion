@@ -113,7 +113,6 @@ class Product extends Model
 
         $productsPaginate = $products->orderBy('created_at', 'desc')->paginate($pagination);
 
-
         return $productsPaginate;
     }
 

@@ -32,17 +32,6 @@ class ProductService
         $imgName = substr($link, strrpos($link, '/') + 1);
         return $imgName;
     }
-    
-    /**
-     * redirectToAdminHomePage
-     * Redirect user to admin home page if form was send successfull
-     * @param  mixed $message
-     * @return void
-     */
-    public function redirectToAdminHomePageWithMessage($message)
-    {
-        return redirect()->route('admin.product.index')->with('message', $message);
-    }
 }
 
 ?>

@@ -29,10 +29,10 @@ class FrontController extends Controller
         
         // get pagination associate to product
         $productsPaginate = Product::getPagination($products, 6);
-        
-        // Get product count
-        $productCount = $this->getAllCountProduct($products);
 
+        // Get product count
+        $productCount = $productsPaginate->total();
+        
         return view('front.index', ['products' => $productsPaginate, 'count' => $productCount]);
     }
 
@@ -43,7 +43,7 @@ class FrontController extends Controller
         
         $productsPaginate = Product::getPagination($products, 6);
 
-        $productCount = $this->getAllCountProduct($products);
+        $productCount = $productsPaginate->total();
 
         $category = Category::getByID($id);
         
@@ -81,7 +81,7 @@ class FrontController extends Controller
     {
         $products = Product::getByStatusOnSale();
         $productsPaginate = Product::getPagination($products, 6);
-        $productCount = $this->getAllCountProduct($products);
+        $productCount = $productsPaginate->total();
 
         return view(
             'front.sales', 
@@ -89,17 +89,5 @@ class FrontController extends Controller
             'products' => $productsPaginate,
             'count' => $productCount]
         );
-    }
-
-    /**
-     * getAllCountProduct
-     * Count product collection
-     * @return int
-     */
-    public function getAllCountProduct($products): int
-    {
-        $countProduct = $products->count();
-
-        return $countProduct;
     }
 }

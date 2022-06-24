@@ -42,7 +42,7 @@
                     placeholder="Accessoire, Bijoux ..."
                     name="name" value="{{ $isCreateRoute === true ? old('name') : old('name', $category->name)}}"
                 >
-                @error('category')
+                @error('name')
                     <div class="alert alert-danger" role="alert"> <p class="mb-0"> {{$message}} </p> </div>
                 @enderror
         </div>

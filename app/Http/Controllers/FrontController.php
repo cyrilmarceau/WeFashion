@@ -54,7 +54,7 @@ class FrontController extends Controller
         ]);
     }
 
-        
+
     /**
      * getByID
      * Get product by ID and return it in a view
@@ -86,8 +86,9 @@ class FrontController extends Controller
         return view(
             'front.sales', 
             [
-            'products' => $productsPaginate,
-            'count' => $productCount]
+                'products' => $productsPaginate,
+                'count' => $productCount
+            ]
         );
     }
 }

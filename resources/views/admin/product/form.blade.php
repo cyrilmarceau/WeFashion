@@ -47,7 +47,7 @@
         <div class="mb-3">
             <label for="price" class="form-label">Prix</label>
             <input type="number"
-                step="any"
+                step="0.01"
                 min=0
                 class="form-control" id="price"
                 placeholder="54.99" 
